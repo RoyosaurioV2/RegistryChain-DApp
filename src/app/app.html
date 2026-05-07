@@ -11,6 +11,7 @@
         <p>{{ web3.contractAddressITV }} | {{ web3.balanceToken() }}</p>
         <hr/>
         <p>Contrato Counter en : {{web3.contractAddressContador}}</p>
+        <p>{{web3.contador()}}</p>
         <p><button [disabled]="isClickedInc" (click)="incrementar()">Incrementar</button></p>
       } @else {  
         <button (click)="web3.connectWallet()">Conectar Wallet</button>

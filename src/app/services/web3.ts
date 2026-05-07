@@ -9,7 +9,8 @@ export class Web3Service {
   // Usar Signals de Angular para llevar el seguimiento de la cuenta del usuario 
   public account = signal<string | null>(null); 
   public balance = signal<string | null>(null);
-  public balanceToken = signal<string | null>(null); 
+  public balanceToken = signal<string | null>(null);
+  public contador = signal<string | null>(null); 
 
   // contrato: ERC20 - ITV
   public contractAddressITV: string = "0x0084AFF1029AbE14cDaf25De8da8b989ded1fc7b";
@@ -21,6 +22,7 @@ export class Web3Service {
   private provider: any;
   private signer: any;
   private contract: any;
+  private contractCounter: any;
 
   // uriProvider, que no requiere conectar con un Wallet, pero sirve para consultar, invocando funciones                     
   private uriProvider:     string = "https://sepolia.infura.io/v3/2IF8TbNFVS3gBJacR2ukyNrEPCi";
@@ -45,6 +47,9 @@ export class Web3Service {
         // this.connectToContract(this.contractAddressITV,this.abiString,this.provider);
 
         this.getBalanceOfToken(this.contractAddressITV,this.accounts[0]);
+
+        this.contador.set('Contador: 0');
+        this.setupEventListener();
 
       } catch (error) { 
         console.error("El usuario rechazó la conexión", error); 
@@ -116,6 +121,31 @@ export class Web3Service {
     
     console.log(tx.hash);
 
+  }
+
+  public async setupEventListener(){
+    const _abi = ["function increment() public",
+              "function getCount() public view returns (uint256)",
+              "event ValueChanged(uint oldValue, uint256 newValue)"
+            ];
+
+    const _signer = await this.provider.getSigner();
+    this.contractCounter = new ethers.Contract(this.contractAddressContador, _abi, _signer);
+
+    var ant: number = 0;
+    var nvo: number = 0;
+
+    // Begin listening for any ValueChanged event
+    this.contractCounter.on("ValueChanged", (ant:number,nvo:number,event:any) => {
+     
+      // console.log(`${event} => ${ ant } => ${ nvo }`);
+
+      // The `event.log` has the entire EventLog
+      this.contador.set(`Contador: ${nvo}`);
+      // Optionally, stop listening
+      // event.removeListener();
+
+    });
   }
 
 } 
