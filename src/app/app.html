@@ -8,7 +8,9 @@
       <hr/>
       <br/> 
       @if (web3.account()) {  
-      <p>Cuenta conectada: <b>{{ web3.account() }}</b></p>  
+      <p>Cuenta conectada: <b>{{ web3.account() }} </b></p> 
+      <p>{{ web3.balance() }}</p>
+      <p>{{ web3.balanceToken() }}</p>
       } @else {  
       <button (click)="web3.connectWallet()">Conectar Wallet</button>
       }  
