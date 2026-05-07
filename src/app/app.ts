@@ -13,6 +13,17 @@ import { Web3Service } from './services/web3';
 export class App {
   public web3 = inject(Web3Service);
   protected readonly title = signal('angular-hardhat-starter-dapp');
+
+  public isClickedInc=false;
+
+  incrementar(){
+    this.isClickedInc = true;
+    this.web3.increment().then((data)=>{this.isClickedInc = false})
+                         .catch((error)=>{
+                            this.isClickedInc = false;
+                            console.log(error);
+                          });
+  }
 }
 
 

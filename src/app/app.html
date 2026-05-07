@@ -1,21 +1,21 @@
 <main class="main">
-  
   <div class="content">
-
     <div style="text-align:center">  
       <h1>Angular 20 + Ethers.js</h1>
       <h2>Template de aplicación DApp</h2>
       <hr/>
-      <br/> 
       @if (web3.account()) {  
-      <p>Cuenta conectada: <b>{{ web3.account() }} </b></p> 
-      <p>{{ web3.balance() }}</p>
-      <p>{{ web3.balanceToken() }}</p>
+        <p>Cuenta conectada: <b>{{ web3.account() }} </b></p> 
+        <p>{{ web3.balance() }}</p>
+        <hr/>
+        <p>{{ web3.contractAddressITV }} | {{ web3.balanceToken() }}</p>
+        <hr/>
+        <p>Contrato Counter en : {{web3.contractAddressContador}}</p>
+        <p><button [disabled]="isClickedInc" (click)="incrementar()">Incrementar</button></p>
       } @else {  
-      <button (click)="web3.connectWallet()">Conectar Wallet</button>
+        <button (click)="web3.connectWallet()">Conectar Wallet</button>
       }  
     </div>
-
   </div>
 </main>
 
