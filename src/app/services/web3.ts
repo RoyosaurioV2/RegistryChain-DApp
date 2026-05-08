@@ -48,7 +48,7 @@ export class Web3Service {
 
         this.getBalanceOfToken(this.contractAddressITV,this.accounts[0]);
 
-        this.contador.set('Contador: 0');
+        this.getCount();
         this.setupEventListener();
 
       } catch (error) { 
@@ -89,7 +89,7 @@ export class Web3Service {
   }
 
   async getBalanceOfToken(_tokenAddress: string,_userAddress:string){
-    const _abi = [ "function transfer(address, uint256) public returns (bool)",
+    const _abi = ["function transfer(address, uint256) public returns (bool)",
                   "function transferFrom(address, address, uint256) public returns (bool)",
                   "function balanceOf(address) view returns (uint256)",
                   "function approve(address, uint256) public returns (bool)",
@@ -105,6 +105,20 @@ export class Web3Service {
     this.balanceToken.set(tokenBalance);
     
     return;
+  }
+
+  async getCount() {
+    // Ejemplo de invocación a funcion que genera transacción.
+    const _abi = ["function increment() public",
+                  "function getCount() public view returns (uint256)",
+                  "event ValueChanged(uint oldValue, uint256 newValue)"
+                 ];
+
+    var contract : ethers.Contract = new ethers.Contract(this.contractAddressContador, _abi, this.provider);
+    const contador = await contract["getCount"]();
+    this.contador.set(`Contador: ${contador}`);
+    
+    return
   }
 
   public async increment(){
@@ -125,9 +139,9 @@ export class Web3Service {
 
   public async setupEventListener(){
     const _abi = ["function increment() public",
-              "function getCount() public view returns (uint256)",
-              "event ValueChanged(uint oldValue, uint256 newValue)"
-            ];
+                  "function getCount() public view returns (uint256)",
+                  "event ValueChanged(uint oldValue, uint256 newValue)"
+                 ];
 
     const _signer = await this.provider.getSigner();
     this.contractCounter = new ethers.Contract(this.contractAddressContador, _abi, _signer);
@@ -135,14 +149,15 @@ export class Web3Service {
     var ant: number = 0;
     var nvo: number = 0;
 
-    // Begin listening for any ValueChanged event
+    // Comienza a atender cualquier evento en "ValueChanged"
     this.contractCounter.on("ValueChanged", (ant:number,nvo:number,event:any) => {
      
-      // console.log(`${event} => ${ ant } => ${ nvo }`);
+      console.log(`Registro de evento: ${event} => ${ ant } => ${ nvo }`);
 
-      // The `event.log` has the entire EventLog
+      //  Se actualiza la variable Signal contador
       this.contador.set(`Contador: ${nvo}`);
-      // Optionally, stop listening
+      
+      // La escucha de eventos se puede detener con removeListeener
       // event.removeListener();
 
     });
