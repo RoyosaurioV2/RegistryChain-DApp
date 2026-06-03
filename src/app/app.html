@@ -1,43 +1,115 @@
 
-
 <main class="main">
-    <div style="text-align:left"><img src="images/logoTecNM.png" width="90%"></div>
-    <div class="content">
-      <div style="text-align:center">
-        <h1>Plantilla de aplicación DApp</h1>
-        <h2>Angular 20 + Ethers.js</h2>
-        <p><a href="https://angular-ethers-starter.web.app">https://angular-ethers-starter.web.app</a></p>
-        <hr/>
-        <h3>Tecnol&oacute;gico Nacional de M&eacute;xico, Campus Veracruz</h3>
-        <h3>MSI. Genaro M&eacute;ndez</h3>
-        <h4>Materia: Transacciones computacionales con Blockchain</h4>
-        <h4>Mayo 2026</h4>
-        <p>Proyecto en Bitbucket</p>
-        <p><a href="https://bitbucket.org/tecnmver/angular-hardhat-starter-dapp.git/src">https://bitbucket.org/tecnmver/angular-hardhat-starter-dapp.git/src</a></p>
+  <div style="text-align:left">
+    <img src="images/logoTecNM.png" width="90%">
+  </div>
+
+  <div class="content">
+    <div style="text-align:center">
+      <h1>RegistryChain DApp</h1>
+      <h2>Sistema descentralizado para registro y verificación de equipos tecnológicos</h2>
+      <h3>Angular + Ethers.js + Ethereum Sepolia</h3>
+
+      <hr />
+
+      @if (web3.account()) {
+        <p>Wallet conectada:</p>
+        <p><b>{{ web3.account() }}</b></p>
+
+        <hr />
+
+        <h2>Registrar equipo tecnológico</h2>
+
+        <p><input [(ngModel)]="numeroSerie" placeholder="Número de serie"></p>
+        <p><input [(ngModel)]="tipo" placeholder="Tipo de equipo"></p>
+        <p><input [(ngModel)]="marca" placeholder="Marca"></p>
+        <p><input [(ngModel)]="modelo" placeholder="Modelo"></p>
+        <p><input [(ngModel)]="propietario" placeholder="Propietario"></p>
+
         <p>
-        <p><code>git clone https://bitbucket.org/tecnmver/angular-hardhat-starter-dapp.git</code></p>
-        <p>Aplicación referencia Counter en: <a href="http://genaromendez.com">http://genaromendez.com</a></p>
-        <br/>
-        <hr/>
-        @if (web3.account()) {
-          <h3>1. Ejemplo de lectura de saldo en ETH.</h3>  
-          <p>Cuenta conectada: <b>{{ web3.account() }} </b></p> 
-          <p>{{ web3.balance() }}</p>
-          <hr/>
-          <h3>2. Ejemplo de lectura de un Token ERC20</h3>
-          <p>Lectura de Token ERC20 en: {{ web3.contractAddressITV }}</p>
-          <p>{{ web3.balanceToken() }}</p>
-          <hr/>
-          <h3>3. Ejemplo de lectura, escritura y captura de eventos de un Smart Contract</h3>
-          <p>Contrato Counter en : {{web3.contractAddressContador}}</p>
-          <p>{{web3.contador()}}</p>
-          <p><button [disabled]="isClickedInc" (click)="incrementar()">Incrementar</button></p>
-        } @else {
-          <p><button (click)="web3.connectWallet()">Conectar Wallet</button></p>
-        }  
-      </div>
+          <button [disabled]="cargando" (click)="registrar()">
+            Registrar Equipo
+          </button>
+        </p>
+
+        <hr />
+
+        <h2>Consultar equipo</h2>
+
+        <p><input [(ngModel)]="numeroSerieConsulta" placeholder="Número de serie a consultar"></p>
+
+        <p>
+          <button [disabled]="cargando" (click)="consultar()">
+            Consultar
+          </button>
+        </p>
+
+        @if (equipo) {
+          <div class="resultado">
+            <h3>Resultado de consulta</h3>
+            <p><b>Número de serie:</b> {{ equipo.numeroSerie }}</p>
+            <p><b>Tipo:</b> {{ equipo.tipo }}</p>
+            <p><b>Marca:</b> {{ equipo.marca }}</p>
+            <p><b>Modelo:</b> {{ equipo.modelo }}</p>
+            <p><b>Propietario:</b> {{ equipo.propietario }}</p>
+            <p><b>Estado:</b> {{ equipo.estado }}</p>
+            <p><b>Fecha de registro:</b> {{ equipo.fechaRegistro }}</p>
+            <p><b>Registrado por:</b> {{ equipo.registradoPor }}</p>
+          </div>
+        }
+
+        <hr />
+
+        <h2>Actualizar estado del equipo</h2>
+
+        <p><input [(ngModel)]="numeroSerieEstado" placeholder="Número de serie"></p>
+
+        <p>
+          <select [(ngModel)]="nuevoEstado">
+            <option [value]="0">Activo</option>
+            <option [value]="1">Extraviado</option>
+            <option [value]="2">Robado</option>
+            <option [value]="3">Recuperado</option>
+          </select>
+        </p>
+
+        <p>
+          <button [disabled]="cargando" (click)="actualizarEstado()">
+            Actualizar Estado
+          </button>
+        </p>
+
+        <hr />
+
+        @if (mensaje) {
+          <p><b>{{ mensaje }}</b></p>
+        }
+
+        @if (ultimoHash) {
+          <p>Último hash de transacción:</p>
+          <p><code>{{ ultimoHash }}</code></p>
+        }
+
+        <hr>
+
+        <div class="footer">
+          <h4>RegistryChain DApp</h4>
+          <p>Desarrollado por Rodrigo Ernesto Loyo García</p>
+          <p>Tecnológico Nacional de México - Campus Veracruz</p>
+          <p>Ethereum Sepolia Testnet</p>
+        </div>
+
+      } @else {
+        <p>
+          <button (click)="web3.connectWallet()">Conectar Wallet</button>
+        </p>
+      }
     </div>
-    <div style="text-align:left"><img src="images/logoITV.png" width="90%"></div>
+  </div>
+
+  <div style="text-align:left">
+    <img src="images/logoITV.png" width="90%">
+  </div>
 </main>
 
 <router-outlet />

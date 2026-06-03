@@ -1,109 +1,81 @@
-  :host {
-    --bright-blue: oklch(51.01% 0.274 263.83);
-    --electric-violet: oklch(53.18% 0.28 296.97);
-    --french-violet: oklch(47.66% 0.246 305.88);
-    --vivid-pink: oklch(69.02% 0.277 332.77);
-    --hot-red: oklch(61.42% 0.238 15.34);
-    --orange-red: oklch(63.32% 0.24 31.68);
+:host {
+  font-family: Arial, Helvetica, sans-serif;
+  display: block;
+  min-height: 100vh;
+  background: #f5f6fa;
+  color: #222;
+}
 
-    --gray-900: oklch(19.37% 0.006 300.98);
-    --gray-700: oklch(36.98% 0.014 302.71);
-    --gray-400: oklch(70.9% 0.015 304.04);
+.main {
+  display: grid;
+  grid-template-columns: 140px 1fr 140px;
+  gap: 20px;
+  padding: 30px;
+  box-sizing: border-box;
+}
 
-    --red-to-pink-to-purple-vertical-gradient: linear-gradient(
-      180deg,
-      var(--orange-red) 0%,
-      var(--vivid-pink) 50%,
-      var(--electric-violet) 100%
-    );
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  text-align: center;
+}
 
-    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(
-      90deg,
-      var(--orange-red) 0%,
-      var(--vivid-pink) 50%,
-      var(--electric-violet) 100%
-    );
+h1 {
+  font-size: 42px;
+  margin: 0 0 10px;
+}
 
-    --pill-accent: var(--bright-blue);
+h2 {
+  margin-top: 25px;
+}
 
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    display: block;
-    height: 100dvh;
-  }
+input, select {
+  width: 80%;
+  max-width: 420px;
+  padding: 10px;
+  margin: 6px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+}
 
-  h1 {
-    font-size: 3.125rem;
-    color: var(--gray-900);
-    font-weight: 400;
-    line-height: 100%;
-    letter-spacing: -0.125rem;
-    margin: 0;
-    font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
-  }
+button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  background: #0b4ea2;
+  color: white;
+  cursor: pointer;
+}
 
-  p {
-    margin: 0;
-    color: var(--gray-700);
-  }
+button:disabled {
+  background: #999;
+}
 
-  main {
-    width: 100%;
-    min-height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: left;
-    padding: 1rem;
-    box-sizing: inherit;
-    position: relative;
-  }
+code {
+  word-break: break-all;
+}
 
-  .angular-logo {
-    max-width: 9.2rem;
-  }
+.resultado {
+  text-align: left;
+  max-width: 650px;
+  margin: 20px auto;
+  background: #f0f3f8;
+  padding: 15px;
+  border-radius: 8px;
+}
 
-  .content {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    /* max-width: 800px;*/
-    margin-bottom: 3rem;
-  }
+img {
+  max-width: 100%;
+}
 
-  .content h1 {
-    margin-top: 1.75rem;
-  }
-
-  .content p {
-    margin-top: 1.5rem;
-  }
-
-  .divider {
-    width: 1px;
-    background: var(--red-to-pink-to-purple-vertical-gradient);
-    margin-inline: 0.5rem;
-  }
-
-  .grid-container {
-      display: grid;
-      /* Creates 3 columns of equal width */
-      grid-template-columns: repeat(3, 1fr); 
-      /* Space between columns */
-      gap: 1rem; 
-  }
-
-  /*   @media screen and (max-width: 800px) { */
-  @media screen {
-    .divider {
-      height: 1px;
-      width: 100%;
-      background: var(--red-to-pink-to-purple-horizontal-gradient);
-      margin-block: 1.5rem;
-    }
-  }
+.footer {
+  margin-top: 20px;
+  padding: 15px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
