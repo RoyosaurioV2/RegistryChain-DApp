@@ -48,4 +48,3 @@ Genaro Méndez López
 Instituto Tecnológico de Veracruz
 
 Materia: Transacciones Computacionales con Blockchain
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
