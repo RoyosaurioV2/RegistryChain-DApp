@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "angular-ethers-starter"
-  }
+    "default": "registrychain-dapp"
+  },
+  "targets": {},
+  "etags": {}
 }

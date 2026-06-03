@@ -1,81 +1,228 @@
 :host {
-  font-family: Arial, Helvetica, sans-serif;
   display: block;
   min-height: 100vh;
-  background: #f5f6fa;
-  color: #222;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #0f172a;
+  color: #e5e7eb;
 }
 
-.main {
-  display: grid;
-  grid-template-columns: 140px 1fr 140px;
-  gap: 20px;
-  padding: 30px;
-  box-sizing: border-box;
+.app-shell {
+  min-height: 100vh;
 }
 
-.content {
-  max-width: 900px;
-  margin: 0 auto;
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-  text-align: center;
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 45px 7%;
+  background: linear-gradient(135deg, #111827, #1e3a8a);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.tag {
+  color: #38bdf8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 13px;
+  margin: 0 0 12px;
 }
 
 h1 {
-  font-size: 42px;
+  font-size: 48px;
+  margin: 0;
+  color: white;
+}
+
+.subtitle {
+  max-width: 650px;
+  font-size: 18px;
+  color: #cbd5e1;
+}
+
+.hero-card,
+.status-card,
+.card,
+.message-card,
+.connect-card {
+  background: #111827;
+  border: 1px solid rgba(148,163,184,0.25);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+.hero-card {
+  max-width: 360px;
+  padding: 20px;
+  align-self: center;
+}
+
+.hero-card p {
   margin: 0 0 10px;
+  color: #93c5fd;
 }
 
-h2 {
-  margin-top: 25px;
+.container {
+  padding: 30px 7%;
 }
 
-input, select {
-  width: 80%;
-  max-width: 420px;
-  padding: 10px;
-  margin: 6px;
-  border: 1px solid #bbb;
-  border-radius: 6px;
+.status-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 22px;
+  margin-bottom: 24px;
+}
+
+.status-card h3 {
+  margin: 0 0 8px;
+}
+
+.network {
+  background: #065f46;
+  color: #d1fae5;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.card,
+.connect-card,
+.message-card {
+  padding: 24px;
+}
+
+.card h2,
+.connect-card h2 {
+  margin-top: 0;
+  color: #f8fafc;
+}
+
+input,
+select {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  background: #020617;
+  color: #e5e7eb;
+}
+
+input::placeholder {
+  color: #64748b;
 }
 
 button {
-  padding: 10px 18px;
-  border: none;
-  border-radius: 6px;
-  background: #0b4ea2;
+  width: 100%;
+  margin-top: 14px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: #2563eb;
   color: white;
+  font-weight: 700;
   cursor: pointer;
 }
 
-button:disabled {
-  background: #999;
+button:hover {
+  background: #1d4ed8;
 }
 
-code {
-  word-break: break-all;
+button:disabled {
+  background: #64748b;
+  cursor: not-allowed;
 }
 
 .resultado {
+  margin-top: 18px;
+  padding: 15px;
+  background: #020617;
+  border-radius: 12px;
+  border: 1px solid #334155;
+}
+
+.resultado p {
+  margin: 8px 0;
+}
+
+.badge {
+  display: inline-block;
+  background: #f59e0b;
+  color: #111827;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 999px;
+}
+
+.table-card {
+  margin-top: 24px;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  min-width: 900px;
+}
+
+th {
+  background: #1e40af;
+  color: white;
+  padding: 12px;
   text-align: left;
-  max-width: 650px;
-  margin: 20px auto;
-  background: #f0f3f8;
-  padding: 15px;
-  border-radius: 8px;
 }
 
-img {
-  max-width: 100%;
+td {
+  border-bottom: 1px solid #334155;
+  padding: 10px;
+  color: #cbd5e1;
 }
 
-.footer {
-  margin-top: 20px;
-  padding: 15px;
+code {
+  color: #67e8f9;
+  word-break: break-all;
+  font-size: 12px;
+}
+
+.message-card {
+  margin-top: 24px;
+  border-left: 5px solid #38bdf8;
+}
+
+.connect-card {
+  max-width: 500px;
+  margin: 80px auto;
   text-align: center;
-  font-size: 14px;
-  color: #555;
+}
+
+footer {
+  margin-top: 35px;
+  padding: 20px;
+  text-align: center;
+  color: #94a3b8;
+}
+
+@media (max-width: 1000px) {
+  .hero {
+    flex-direction: column;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 38px;
+  }
 }

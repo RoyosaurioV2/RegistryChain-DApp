@@ -1,115 +1,147 @@
-
-<main class="main">
-  <div style="text-align:left">
-    <img src="images/logoTecNM.png" width="90%">
-  </div>
-
-  <div class="content">
-    <div style="text-align:center">
+<main class="app-shell">
+  <section class="hero">
+    <div>
+      <p class="tag">Blockchain · Ethereum Sepolia · Angular + Ethers.js</p>
       <h1>RegistryChain DApp</h1>
-      <h2>Sistema descentralizado para registro y verificación de equipos tecnológicos</h2>
-      <h3>Angular + Ethers.js + Ethereum Sepolia</h3>
+      <p class="subtitle">
+        Sistema descentralizado para registrar, consultar y verificar equipos tecnológicos mediante smart contracts.
+      </p>
+    </div>
 
-      <hr />
+    <div class="hero-card">
+      <p>Smart Contract</p>
+      <code>0xCda50A780C10d4a3659ce3f3b500Aa4E78977D1F</code>
+    </div>
+  </section>
 
-      @if (web3.account()) {
-        <p>Wallet conectada:</p>
-        <p><b>{{ web3.account() }}</b></p>
+  <section class="container">
+    @if (web3.account()) {
+      <div class="status-card">
+        <div>
+          <h3>Wallet conectada</h3>
+          <code>{{ web3.account() }}</code>
+        </div>
+        <span class="network">Sepolia Testnet</span>
+      </div>
 
-        <hr />
+      <div class="grid">
+        <div class="card">
+          <h2>Registrar equipo</h2>
 
-        <h2>Registrar equipo tecnológico</h2>
+          <input [(ngModel)]="numeroSerie" placeholder="Número de serie">
+          <input [(ngModel)]="tipo" placeholder="Tipo de equipo">
+          <input [(ngModel)]="marca" placeholder="Marca">
+          <input [(ngModel)]="modelo" placeholder="Modelo">
+          <input [(ngModel)]="propietario" placeholder="Propietario">
 
-        <p><input [(ngModel)]="numeroSerie" placeholder="Número de serie"></p>
-        <p><input [(ngModel)]="tipo" placeholder="Tipo de equipo"></p>
-        <p><input [(ngModel)]="marca" placeholder="Marca"></p>
-        <p><input [(ngModel)]="modelo" placeholder="Modelo"></p>
-        <p><input [(ngModel)]="propietario" placeholder="Propietario"></p>
-
-        <p>
           <button [disabled]="cargando" (click)="registrar()">
-            Registrar Equipo
+            Registrar en blockchain
           </button>
-        </p>
+        </div>
 
-        <hr />
+        <div class="card">
+          <h2>Consultar equipo</h2>
 
-        <h2>Consultar equipo</h2>
+          <input [(ngModel)]="numeroSerieConsulta" placeholder="Número de serie a consultar">
 
-        <p><input [(ngModel)]="numeroSerieConsulta" placeholder="Número de serie a consultar"></p>
-
-        <p>
           <button [disabled]="cargando" (click)="consultar()">
-            Consultar
+            Consultar registro
           </button>
-        </p>
 
-        @if (equipo) {
-          <div class="resultado">
-            <h3>Resultado de consulta</h3>
-            <p><b>Número de serie:</b> {{ equipo.numeroSerie }}</p>
-            <p><b>Tipo:</b> {{ equipo.tipo }}</p>
-            <p><b>Marca:</b> {{ equipo.marca }}</p>
-            <p><b>Modelo:</b> {{ equipo.modelo }}</p>
-            <p><b>Propietario:</b> {{ equipo.propietario }}</p>
-            <p><b>Estado:</b> {{ equipo.estado }}</p>
-            <p><b>Fecha de registro:</b> {{ equipo.fechaRegistro }}</p>
-            <p><b>Registrado por:</b> {{ equipo.registradoPor }}</p>
-          </div>
-        }
+          @if (equipo) {
+            <div class="resultado">
+              <h3>Resultado</h3>
+              <p><b>Número de serie:</b> {{ equipo.numeroSerie }}</p>
+              <p><b>Tipo:</b> {{ equipo.tipo }}</p>
+              <p><b>Marca:</b> {{ equipo.marca }}</p>
+              <p><b>Modelo:</b> {{ equipo.modelo }}</p>
+              <p><b>Propietario:</b> {{ equipo.propietario }}</p>
+              <p><b>Estado:</b> <span class="badge">{{ equipo.estado }}</span></p>
+              <p><b>Fecha:</b> {{ equipo.fechaRegistro }}</p>
+              <p><b>Registrado por:</b> <code>{{ equipo.registradoPor }}</code></p>
+            </div>
+          }
+        </div>
 
-        <hr />
+        <div class="card">
+          <h2>Actualizar estado</h2>
 
-        <h2>Actualizar estado del equipo</h2>
+          <input [(ngModel)]="numeroSerieEstado" placeholder="Número de serie">
 
-        <p><input [(ngModel)]="numeroSerieEstado" placeholder="Número de serie"></p>
-
-        <p>
           <select [(ngModel)]="nuevoEstado">
             <option [value]="0">Activo</option>
             <option [value]="1">Extraviado</option>
             <option [value]="2">Robado</option>
             <option [value]="3">Recuperado</option>
           </select>
-        </p>
 
-        <p>
           <button [disabled]="cargando" (click)="actualizarEstado()">
-            Actualizar Estado
+            Actualizar estado
           </button>
-        </p>
-
-        <hr />
-
-        @if (mensaje) {
-          <p><b>{{ mensaje }}</b></p>
-        }
-
-        @if (ultimoHash) {
-          <p>Último hash de transacción:</p>
-          <p><code>{{ ultimoHash }}</code></p>
-        }
-
-        <hr>
-
-        <div class="footer">
-          <h4>RegistryChain DApp</h4>
-          <p>Desarrollado por Rodrigo Ernesto Loyo García</p>
-          <p>Tecnológico Nacional de México - Campus Veracruz</p>
-          <p>Ethereum Sepolia Testnet</p>
         </div>
+      </div>
 
-      } @else {
-        <p>
-          <button (click)="web3.connectWallet()">Conectar Wallet</button>
-        </p>
+      @if (equiposSesion.length > 0) {
+        <div class="card table-card">
+          <h2>Equipos consultados en esta sesión</h2>
+
+          <div class="tabla-contenedor">
+            <table>
+              <thead>
+                <tr>
+                  <th>Número de serie</th>
+                  <th>Tipo</th>
+                  <th>Marca</th>
+                  <th>Modelo</th>
+                  <th>Propietario</th>
+                  <th>Estado</th>
+                  <th>Registrado por</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (item of equiposSesion; track item.numeroSerie) {
+                  <tr>
+                    <td>{{ item.numeroSerie }}</td>
+                    <td>{{ item.tipo }}</td>
+                    <td>{{ item.marca }}</td>
+                    <td>{{ item.modelo }}</td>
+                    <td>{{ item.propietario }}</td>
+                    <td><span class="badge">{{ item.estado }}</span></td>
+                    <td><code>{{ item.registradoPor }}</code></td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
       }
-    </div>
-  </div>
 
-  <div style="text-align:left">
-    <img src="images/logoITV.png" width="90%">
-  </div>
+      @if (mensaje || ultimoHash) {
+        <div class="message-card">
+          @if (mensaje) {
+            <p><b>{{ mensaje }}</b></p>
+          }
+
+          @if (ultimoHash) {
+            <p>Último hash de transacción:</p>
+            <code>{{ ultimoHash }}</code>
+          }
+        </div>
+      }
+
+      <footer>
+        <p>Proyecto desarrollado por <b>Rodrigo Ernesto Loyo García</b></p>
+        <p>Tecnológico Nacional de México · Transacciones Computacionales con Blockchain</p>
+      </footer>
+
+    } @else {
+      <div class="connect-card">
+        <h2>Conectar wallet</h2>
+        <p>Para utilizar la DApp necesitas MetaMask en la red Ethereum Sepolia.</p>
+        <button (click)="web3.connectWallet()">Conectar MetaMask</button>
+      </div>
+    }
+  </section>
 </main>
 
 <router-outlet />
