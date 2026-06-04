@@ -4,7 +4,8 @@
       <p class="tag">Blockchain · Ethereum Sepolia · Angular + Ethers.js</p>
       <h1>RegistryChain DApp</h1>
       <p class="subtitle">
-        Sistema descentralizado para registrar, consultar y verificar equipos tecnológicos mediante smart contracts.
+        Sistema descentralizado para registrar, consultar y verificar equipos tecnológicos mediante
+        smart contracts.
       </p>
     </div>
 
@@ -24,29 +25,52 @@
         <span class="network">Sepolia Testnet</span>
       </div>
 
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <span>Total consultados</span>
+          <strong>{{ totalEquipos }}</strong>
+        </div>
+
+        <div class="metric-card">
+          <span>Activos</span>
+          <strong>{{ totalActivos }}</strong>
+        </div>
+
+        <div class="metric-card">
+          <span>Extraviados</span>
+          <strong>{{ totalExtraviados }}</strong>
+        </div>
+
+        <div class="metric-card">
+          <span>Robados</span>
+          <strong>{{ totalRobados }}</strong>
+        </div>
+
+        <div class="metric-card">
+          <span>Recuperados</span>
+          <strong>{{ totalRecuperados }}</strong>
+        </div>
+      </div>
+
       <div class="grid">
         <div class="card">
           <h2>Registrar equipo</h2>
 
-          <input [(ngModel)]="numeroSerie" placeholder="Número de serie">
-          <input [(ngModel)]="tipo" placeholder="Tipo de equipo">
-          <input [(ngModel)]="marca" placeholder="Marca">
-          <input [(ngModel)]="modelo" placeholder="Modelo">
-          <input [(ngModel)]="propietario" placeholder="Propietario">
+          <input [(ngModel)]="numeroSerie" placeholder="Número de serie" />
+          <input [(ngModel)]="tipo" placeholder="Tipo de equipo" />
+          <input [(ngModel)]="marca" placeholder="Marca" />
+          <input [(ngModel)]="modelo" placeholder="Modelo" />
+          <input [(ngModel)]="propietario" placeholder="Propietario" />
 
-          <button [disabled]="cargando" (click)="registrar()">
-            Registrar en blockchain
-          </button>
+          <button [disabled]="cargando" (click)="registrar()">Registrar en blockchain</button>
         </div>
 
         <div class="card">
           <h2>Consultar equipo</h2>
 
-          <input [(ngModel)]="numeroSerieConsulta" placeholder="Número de serie a consultar">
+          <input [(ngModel)]="numeroSerieConsulta" placeholder="Número de serie a consultar" />
 
-          <button [disabled]="cargando" (click)="consultar()">
-            Consultar registro
-          </button>
+          <button [disabled]="cargando" (click)="consultar()">Consultar registro</button>
 
           @if (equipo) {
             <div class="resultado">
@@ -56,9 +80,13 @@
               <p><b>Marca:</b> {{ equipo.marca }}</p>
               <p><b>Modelo:</b> {{ equipo.modelo }}</p>
               <p><b>Propietario:</b> {{ equipo.propietario }}</p>
-              <p><b>Estado:</b> <span class="badge">{{ equipo.estado }}</span></p>
+              <p>
+                <b>Estado:</b> <span class="badge">{{ equipo.estado }}</span>
+              </p>
               <p><b>Fecha:</b> {{ equipo.fechaRegistro }}</p>
-              <p><b>Registrado por:</b> <code>{{ equipo.registradoPor }}</code></p>
+              <p>
+                <b>Registrado por:</b> <code>{{ equipo.registradoPor }}</code>
+              </p>
             </div>
           }
         </div>
@@ -66,7 +94,7 @@
         <div class="card">
           <h2>Actualizar estado</h2>
 
-          <input [(ngModel)]="numeroSerieEstado" placeholder="Número de serie">
+          <input [(ngModel)]="numeroSerieEstado" placeholder="Número de serie" />
 
           <select [(ngModel)]="nuevoEstado">
             <option [value]="0">Activo</option>
@@ -75,9 +103,7 @@
             <option [value]="3">Recuperado</option>
           </select>
 
-          <button [disabled]="cargando" (click)="actualizarEstado()">
-            Actualizar estado
-          </button>
+          <button [disabled]="cargando" (click)="actualizarEstado()">Actualizar estado</button>
         </div>
       </div>
 
@@ -98,6 +124,7 @@
                   <th>Registrado por</th>
                 </tr>
               </thead>
+
               <tbody>
                 @for (item of equiposSesion; track item.numeroSerie) {
                   <tr>
@@ -106,8 +133,12 @@
                     <td>{{ item.marca }}</td>
                     <td>{{ item.modelo }}</td>
                     <td>{{ item.propietario }}</td>
-                    <td><span class="badge">{{ item.estado }}</span></td>
-                    <td><code>{{ item.registradoPor }}</code></td>
+                    <td>
+                      <span class="badge">{{ item.estado }}</span>
+                    </td>
+                    <td>
+                      <code>{{ item.registradoPor }}</code>
+                    </td>
                   </tr>
                 }
               </tbody>
@@ -116,10 +147,22 @@
         </div>
       }
 
+      @if (historialMovimientos.length > 0) {
+        <div class="card history-card">
+          <h2>Historial de actividad</h2>
+
+          @for (mov of historialMovimientos; track mov) {
+            <p class="history-item">✓ {{ mov }}</p>
+          }
+        </div>
+      }
+
       @if (mensaje || ultimoHash) {
         <div class="message-card">
           @if (mensaje) {
-            <p><b>{{ mensaje }}</b></p>
+            <p>
+              <b>{{ mensaje }}</b>
+            </p>
           }
 
           @if (ultimoHash) {
@@ -133,7 +176,6 @@
         <p>Proyecto desarrollado por <b>Rodrigo Ernesto Loyo García</b></p>
         <p>Tecnológico Nacional de México · Transacciones Computacionales con Blockchain</p>
       </footer>
-
     } @else {
       <div class="connect-card">
         <h2>Conectar wallet</h2>
