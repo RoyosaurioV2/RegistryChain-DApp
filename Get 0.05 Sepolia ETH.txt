@@ -1,0 +1,28 @@
+Get 0.05 Sepolia ETH
+
+Transaction complete! Check your wallet address
+
+Ethereum Sepolia
+
+0x29dD20d0A9d57FdccD76ABef949aE707bB147E8d
+
+0x58f2cd75a4764ce471134ea1cb5011e28c5f3d6d2806b1fa5b17b249dfaeff85
+
+
+Información importante
+
+Dirección del contrato
+0xCda50A780C10d4a3659ce3f3b500Aa4E78977D1F
+
+status	1 Transaction mined and execution completed
+transaction hash	0x796813fe58b76262b699a8aa1776e93b004fc574642511a62e523a49751935e9
+block hash		0x1a733cde14be8ea17e7299f30eaa014f039228c95a336459b9acb527e88fc7f4
+block number		10982384
+contract address	0xCda50A780C10d4a3659ce3f3b500Aa4E78977D1F
+from			0x29dD20d0A9d57FdccD76ABef949aE707bB147E8d
+to	RegistryChain.(constructor)
+transaction cost	1074476 gas 
+decoded input	{}
+decoded output	 - 
+logs	[]
+raw logs	[]
